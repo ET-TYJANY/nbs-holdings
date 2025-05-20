@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IBS HOLDING</title>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body, html {
       margin: 0;
       padding: 0;
       height: 100%;
       font-family: Arial, sans-serif;
-      /* background: linear-gradient(to right, #800000, #8B0000); */
-  background: linear-gradient(to bottom, #8B0000, #2e1111); /* dégradé rouge vers noir */
-
+      background: linear-gradient(to bottom, #8B0000, #2e1111);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -32,51 +34,50 @@
     }
 
     @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
+      to { opacity: 1; }
     }
 
     .container {
       text-align: center;
       position: relative;
       z-index: 1;
+      padding: 2vh 2vw;
+      max-width: 100vw;
     }
 
     .star-wrapper {
       position: relative;
-      width: 600px;
-      height: 600px;
+      width: 60vw;
+      max-width: 400px;
+      aspect-ratio: 1/1;
+      margin: 0 auto;
     }
 
-    .star-shadow {
+    .star-shadow, .star {
       position: absolute;
       width: 100%;
       height: 100%;
       background: url('images/e_maroc.gif') no-repeat center center;
       background-size: contain;
+    }
+
+    .star-shadow {
       transform: scale(0.9);
       opacity: 0.4;
       filter: blur(4px);
       animation: rotateSlow 20s linear infinite;
     }
 
+    @keyframes rotateSlow {
+      from { transform: scale(0.9) rotate(0deg); }
+      to { transform: scale(0.9) rotate(360deg); }
+    }
+
     .star {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background: url('images/e_maroc.gif') no-repeat center center;
-      background-size: contain;
-      margin: 0 auto;
       animation: zoomIn 1.5s ease-in-out;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-
-    @keyframes rotateSlow {
-      from { transform: scale(0.9) rotate(0deg); }
-      to { transform: scale(0.9) rotate(360deg); }
     }
 
     @keyframes zoomIn {
@@ -91,8 +92,10 @@
     }
 
     .start-button {
-      width: 120px;
-      height: 120px;
+      width: 20vw;
+      max-width: 120px;
+      height: 20vw;
+      max-height: 120px;
       border-radius: 50%;
       background: transparent;
       border: 4px solid #fff;
@@ -108,7 +111,7 @@
     .start-button span {
       color: white;
       font-weight: bold;
-      font-size: 20px;
+      font-size: 1.2em;
       position: relative;
       z-index: 3;
     }
@@ -118,8 +121,8 @@
       position: absolute;
       top: -10px;
       left: -10px;
-      width: 140px;
-      height: 140px;
+      width: calc(100% + 20px);
+      height: calc(100% + 20px);
       border: 2px dashed #ffffff80;
       border-radius: 50%;
       animation: spin 3s linear infinite;
@@ -138,8 +141,7 @@
     .content {
       display: none;
       color: white;
-      font-size: 40px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-size: 2.5vw;
       font-weight: bold;
       animation: slideIn 1s ease forwards;
     }
@@ -158,16 +160,16 @@
     nav {
       display: flex;
       justify-content: center;
-      gap: 30px;
+      flex-wrap: wrap;
+      gap: 20px;
       margin-top: 20px;
-      font-size: 18px;
+      font-size: 1em;
     }
 
     nav a {
       color: #fff;
       text-decoration: none;
       transition: color 0.3s ease;
-      cursor: pointer;
     }
 
     nav a:hover {
@@ -175,19 +177,38 @@
     }
 
     .page-content {
-      font-size: 20px;
-      margin-top: 30px;
+      font-size: 1em;
+      margin-top: 20px;
       color: #fff;
       text-align: center;
     }
 
+    /* Mobile-specific adjustments */
+    @media (max-width: 768px) {
+      .container {
+        padding: 4vh 4vw;
+      }
 
+      .content {
+        font-size: 5vw;
+      }
 
+      nav {
+        flex-direction: column;
+        gap: 10px;
+      }
 
+      .start-button {
+        width: 30vw;
+        height: 30vw;
+        max-width: 150px;
+        max-height: 150px;
+      }
 
-
- 
-
+      .start-button span {
+        font-size: 1em;
+      }
+    }
   </style>
 </head>
 <body>
@@ -197,14 +218,9 @@
     <div class="star-wrapper" id="star">
       <div class="star-shadow"></div>
       <div class="star">
-        <!-- <div class="start-button" onclick="showContent()">
-          <span>START</span>
-        </div> -->
-
         <a href="main.html" class="start-button">
           <span>START</span>
         </a>
-
       </div>
     </div>
     <div class="content" id="content">
@@ -222,8 +238,6 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/stats.js/r17/Stats.min.js"></script>
-
   <script>
     function showContent() {
       const star = document.getElementById('star');
@@ -266,16 +280,8 @@
           stroke: { width: 0, color: '#000000' },
           polygon: { nb_sides: 5 }
         },
-        opacity: {
-          value: 0.5,
-          random: false,
-          anim: { enable: false }
-        },
-        size: {
-          value: 3,
-          random: true,
-          anim: { enable: false }
-        },
+        opacity: { value: 0.5 },
+        size: { value: 3, random: true },
         line_linked: {
           enable: true,
           distance: 150,
@@ -286,26 +292,18 @@
         move: {
           enable: true,
           speed: 6,
-          direction: 'none',
-          random: false,
-          straight: false,
-          out_mode: 'out',
-          bounce: false
+          out_mode: 'out'
         }
       },
       interactivity: {
-        detect_on: 'canvas',
         events: {
           onhover: { enable: true, mode: 'repulse' },
           onclick: { enable: true, mode: 'push' },
           resize: true
         },
         modes: {
-          grab: { distance: 400, line_linked: { opacity: 1 } },
-          bubble: { distance: 400, size: 40, duration: 2, opacity: 8 },
           repulse: { distance: 200 },
-          push: { particles_nb: 4 },
-          remove: { particles_nb: 2 }
+          push: { particles_nb: 4 }
         }
       },
       retina_detect: true
