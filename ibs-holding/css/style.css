@@ -1,0 +1,304 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #800000, #8B0000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: white;
+}
+
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.fade-in {
+  animation: fadeIn 2s ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.container {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.star-wrapper {
+  position: relative;
+  width: 600px;
+  height: 600px;
+}
+
+.star-shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('../images/e_maroc.gif') no-repeat center center;
+  background-size: contain;
+  transform: scale(0.9);
+  opacity: 0.4;
+  filter: blur(4px);
+  animation: rotateSlow 20s linear infinite;
+}
+
+.star {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: url('../images/e_maroc.gif') no-repeat center center;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: zoomIn 1.5s ease-in-out;
+}
+
+@keyframes rotateSlow {
+  from { transform: scale(0.9) rotate(0deg); }
+  to { transform: scale(0.9) rotate(360deg); }
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.start-button {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: transparent;
+  border: 4px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  animation: pulseBorder 2s infinite;
+}
+
+.start-button span {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.start-button::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 140px;
+  height: 140px;
+  border: 2px dashed #ffffff80;
+  border-radius: 50%;
+  animation: spin 3s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulseBorder {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.content {
+  display: none;
+  animation: slideIn 1s ease forwards;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  justify-items: center;
+  margin-top: 30px;
+}
+
+.service-item {
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.service-item:hover {
+  transform: scale(1.1);
+}
+
+.service-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.page-content {
+  margin-top: 40px;
+}
+
+.services-circle {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  margin: 50px auto;
+  border-radius: 50%;
+  animation: rotateCircle 60s linear infinite;
+}
+
+.service-item {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  transform-origin: 250px 250px;
+  transition: transform 0.3s ease;
+}
+
+.service-item img {
+  width: 60px;
+  height: 60px;
+  transition: transform 0.3s ease;
+}
+
+.service-item p {
+  margin: 5px 0 0;
+  font-size: 14px;
+  color: #fff;
+}
+
+.service-item:hover img {
+  animation: pulse 1s infinite;
+  transform: scale(1.2) rotate(10deg);
+}
+
+/* Disposition en cercle */
+.services-circle .service-item:nth-child(1) { transform: rotate(0deg) translate(200px) rotate(0deg); }
+.services-circle .service-item:nth-child(2) { transform: rotate(45deg) translate(200px) rotate(-45deg); }
+.services-circle .service-item:nth-child(3) { transform: rotate(90deg) translate(200px) rotate(-90deg); }
+.services-circle .service-item:nth-child(4) { transform: rotate(135deg) translate(200px) rotate(-135deg); }
+.services-circle .service-item:nth-child(5) { transform: rotate(180deg) translate(200px) rotate(-180deg); }
+.services-circle .service-item:nth-child(6) { transform: rotate(225deg) translate(200px) rotate(-225deg); }
+.services-circle .service-item:nth-child(7) { transform: rotate(270deg) translate(200px) rotate(-270deg); }
+.services-circle .service-item:nth-child(8) { transform: rotate(315deg) translate(200px) rotate(-315deg); }
+
+/* Animation "pulse" */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Rotation subtile de l'ensemble */
+@keyframes rotateCircle {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+
+
+
+
+
+
+
+
+
+.services-circle {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  margin: 50px auto;
+  border-radius: 50%;
+  animation: rotateCircle 30s linear infinite;
+}
+
+.center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 28px;
+  color: white;
+  font-weight: bold;
+  z-index: 10;
+  text-align: center;
+}
+
+.service-item {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 50%;
+  left: 50%;
+  margin: -40px;
+  animation: orbit 30s linear infinite;
+  transform-origin: 200px center;
+}
+
+.service-item img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.service-item:hover img {
+  animation: pulse 1s infinite;
+  transform: scale(1.2);
+}
+
+/* Position des éléments autour du cercle */
+.service-item:nth-child(2) { transform: rotate(0deg) translateX(200px); }
+.service-item:nth-child(3) { transform: rotate(45deg) translateX(200px); }
+.service-item:nth-child(4) { transform: rotate(90deg) translateX(200px); }
+.service-item:nth-child(5) { transform: rotate(135deg) translateX(200px); }
+.service-item:nth-child(6) { transform: rotate(180deg) translateX(200px); }
+.service-item:nth-child(7) { transform: rotate(225deg) translateX(200px); }
+.service-item:nth-child(8) { transform: rotate(270deg) translateX(200px); }
+.service-item:nth-child(9) { transform: rotate(315deg) translateX(200px); }
+
+/* Rotation de l’ensemble */
+@keyframes rotateCircle {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Animation pulse */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
