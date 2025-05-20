@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>NBS HOLDING - Services Complets pour Étrangers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NBS Holding offre 8 services clés pour les étrangers : voiture, événements, logement, nourriture et plus encore">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Animate.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <style>
+    :root {
+      --primary-color: #8B0000;
+      --secondary-color: #FFD700;
+      --dark-color: #000000;
+      --light-color: #FFFFFF;
+      --gray-color: #F5F5F5;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, var(--primary-color), var(--dark-color));
+      color: var(--light-color);
+      overflow-x: hidden;
+    }
+
+    /* Particles Background */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* Header Styles */
+    .navbar {
+      transition: all 0.5s ease;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(10px);
+      padding: 15px 0;
+    }
+
+    .navbar.scrolled {
+      background: rgba(0, 0, 0, 0.9);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      padding: 10px 0;
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.8rem;
+      color: var(--light-color) !important;
+    }
+
+    .navbar-brand img {
+      height: 50px;
+      transition: all 0.3s ease;
+    }
+
+    .navbar.scrolled .navbar-brand img {
+      height: 40px;
+    }
+
+    .nav-link {
+      color: var(--light-color) !important;
+      font-weight: 500;
+      margin: 0 10px;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--secondary-color);
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--secondary-color) !important;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 100px 0;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      animation: fadeInDown 1s ease-out both;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .btn-primary {
+      background-color: var(--secondary-color);
+      border: none;
+      color: var(--dark-color);
+      font-weight: 600;
+      padding: 12px 30px;
+      border-radius: 50px;
+      transition: all 0.3s ease;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--light-color);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Services Section */
+    .services-section {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 60px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50%;
+      height: 3px;
+      background-color: var(--secondary-color);
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 30px;
+      margin-bottom: 30px;
+      transition: all 0.5s ease;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      height: 100%;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .service-card.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px) !important;
+      background: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .service-icon {
+      font-size: 3rem;
+      color: var(--secondary-color);
+      margin-bottom: 20px;
+    }
+
+    .service-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+
+    /* About Section */
+    .about-section .col-lg-6 {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: all 0.8s ease;
+    }
+
+    .about-section .col-lg-6.show {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .about-section .col-lg-6:last-child {
+      transform: translateX(50px);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .contact-info {
+      margin-bottom: 30px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease;
+    }
+
+    .contact-info.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .contact-icon {
+      font-size: 2rem;
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+    }
+
+    /* Footer */
+    footer {
+      background-color: rgba(0, 0, 0, 0.9);
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    .social-icons {
+      margin-bottom: 20px;
+    }
+
+    .social-icons a {
+      color: var(--light-color);
+      font-size: 1.5rem;
+      margin: 0 10px;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      display: inline-block;
+    }
+
+    .social-icons a.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .social-icons a:hover {
+      color: var(--secondary-color);
+      transform: translateY(-5px) !important;
+    }
+
+    /* Custom Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .hero p {
+        font-size: 1.1rem;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .about-section .col-lg-6 {
+        transform: translateY(50px) !important;
+      }
+    }
+.cursor {
+  display: inline-block;
+  background-color: #FFD700;
+  width: 4px; /* Largeur augmentée */
+  height: 1.2em; /* Assure qu’il suit la hauteur du texte */
+  animation: blink 1.5s infinite;
+  margin-left: 5px;
+  vertical-align: bottom;
+  border-radius: 2px;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+
+
+    
+  </style>
+</head>
+
+<body>
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="images/logo.gif" alt="NBS Holding Logo" class="me-2">
+        NBS HOLDING
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Accueil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">À propos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <!-- <h1>VOTRE PARTENAIRE DE CONFIANCE</h1> -->
+        <h1>VOTRE PARTENAIRE DE <br>
+          <span class="typed-text"></span><span class="cursor">&nbsp;</span></h1>
+
+        <p>NBS Holding offre aux étrangers 8 services essentiels pour faciliter leur installation et leur vie quotidienne</p>
+        <a href="#services" class="btn btn-primary">Découvrir nos services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <h2 class="section-title text-center">Nos Services</h2>
+      
+      <div class="row">
+        <!-- Service 1 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-car"></i>
+            </div>
+            <h3 class="service-title">Services Automobiles</h3>
+            <p>Location de voitures, assistance véhicule, achat/vente et services de chauffeur pour vos déplacements.</p>
+          </div>
+        </div>
+        
+        <!-- Service 2 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+            <h3 class="service-title">Organisation d'Événements</h3>
+            <p>Planification complète d'événements : mariages, conférences, fêtes d'entreprise et plus encore.</p>
+          </div>
+        </div>
+        
+        <!-- Service 3 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-home"></i>
+            </div>
+            <h3 class="service-title">Solutions Immobilières</h3>
+            <p>Location, achat et gestion de biens immobiliers avec services de conciergerie inclus.</p>
+          </div>
+        </div>
+        
+        <!-- Service 4 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-utensils"></i>
+            </div>
+            <h3 class="service-title">Services Alimentaires</h3>
+            <p>Catering, livraison de repas, organisation de dîners privés avec chefs personnels.</p>
+          </div>
+        </div>
+        
+        <!-- Service 5 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-passport"></i>
+            </div>
+            <h3 class="service-title">Assistance Administrative</h3>
+            <p>Aide pour les visas, permis de séjour, formalités administratives et services consulaires.</p>
+          </div>
+        </div>
+        
+        <!-- Service 6 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-user-tie"></i>
+            </div>
+            <h3 class="service-title">Services de Conciergerie</h3>
+            <p>Assistance personnalisée 24/7 pour tous vos besoins quotidiens et demandes spéciales.</p>
+          </div>
+        </div>
+        
+        <!-- Service 7 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-plane"></i>
+            </div>
+            <h3 class="service-title">Services de Voyage</h3>
+            <p>Réservations VIP, organisation de voyages sur mesure et services aéroport personnalisés.</p>
+          </div>
+        </div>
+        
+        <!-- Service 8 -->
+        <div class="col-md-6 col-lg-3">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-language"></i>
+            </div>
+            <h3 class="service-title">Services de Traduction</h3>
+            <p>Traduction professionnelle et interprétation dans toutes les langues principales.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h2 class="section-title">À propos de NBS Holding</h2>
+          <p>NBS Holding est une entreprise leader spécialisée dans l'accompagnement des étrangers, offrant des services complets et personnalisés pour faciliter leur installation et leur vie quotidienne.</p>
+          <p>Fondée sur des principes d'excellence et de service client, notre entreprise s'engage à fournir des solutions sur mesure adaptées aux besoins spécifiques de chaque client.</p>
+          <p>Avec une équipe multiculturelle et multilingue, nous comprenons les défis auxquels sont confrontés les expatriés et nous nous engageons à rendre leur expérience aussi fluide que possible.</p>
+        </div>
+        <div class="col-lg-6">
+          <img src="images/about-image.jpg" alt="À propos de NBS Holding" class="img-fluid rounded shadow">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <h2 class="section-title text-center">Contactez-nous</h2>
+      
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <div class="contact-info">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <h3>Email</h3>
+            <p>contact@nbsholding.com</p>
+          </div>
+          
+          <div class="contact-info">
+            <div class="contact-icon">
+              <i class="fas fa-phone-alt"></i>
+            </div>
+            <h3>Téléphone</h3>
+            <p>+212 6 00 00 00 00</p>
+          </div>
+          
+          <div class="contact-info">
+            <div class="contact-icon">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <h3>Adresse</h3>
+            <p>123 Avenue des Nations, Casablanca, Maroc</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <p>&copy; 2025 NBS HOLDING. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+  const words = ["SOUTIEN", "SÉCURITÉ", "FIABILITÉ", "EXPERTISE", "ÉCOUTE"];
+  let wordIndex = 0;
+  let letterIndex = 0;
+  let currentWord = "";
+  let isDeleting = false;
+  const typedText = document.querySelector(".typed-text");
+
+  function type() {
+    if (wordIndex >= words.length) wordIndex = 0;
+    currentWord = words[wordIndex];
+
+    if (isDeleting) {
+      typedText.textContent = currentWord.substring(0, letterIndex--);
+    } else {
+      typedText.textContent = currentWord.substring(0, letterIndex++);
+    }
+
+    if (!isDeleting && letterIndex === currentWord.length) {
+      isDeleting = true;
+      setTimeout(type, 1500); // Pause après écriture
+    } else if (isDeleting && letterIndex === 0) {
+      isDeleting = false;
+      wordIndex++;
+      setTimeout(type, 500); // Pause avant écriture suivante
+    } else {
+      setTimeout(type, isDeleting ? 50 : 100); // Vitesse
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    type();
+  });
+</script>
+
+  <script>
+    // Initialize particles.js
+    particlesJS('particles-js', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: '#ffffff' },
+        shape: { type: 'circle' },
+        opacity: { value: 0.5 },
+        size: { value: 3, random: true },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#ffffff',
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 6,
+          direction: 'none',
+          random: false,
+          straight: false,
+          out_mode: 'out'
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: { enable: true, mode: 'repulse' },
+          onclick: { enable: true, mode: 'push' },
+          resize: true
+        },
+        modes: {
+          repulse: { distance: 200 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Animation on scroll for sections
+    function animateOnScroll() {
+      const sections = document.querySelectorAll('section');
+      const serviceCards = document.querySelectorAll('.service-card');
+      const aboutColumns = document.querySelectorAll('.about-section .col-lg-6');
+      const contactInfos = document.querySelectorAll('.contact-info');
+      const socialIcons = document.querySelectorAll('.social-icons a');
+      
+      // Section animations
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const sectionBottom = section.getBoundingClientRect().bottom;
+        
+        if (sectionTop < window.innerHeight * 0.75 && sectionBottom > 0) {
+          section.classList.add('show');
+          
+          // Specific animations for each section
+          if (section.id === 'services') {
+            animateServiceCards();
+          } else if (section.id === 'about') {
+            animateAboutSection();
+          } else if (section.id === 'contact') {
+            animateContactSection();
+          } else if (section.id === 'home') {
+            // Hero section is already animated with CSS
+          }
+        }
+      });
+      
+      // Footer social icons animation
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
+        socialIcons.forEach((icon, index) => {
+          setTimeout(() => {
+            icon.classList.add('show');
+          }, index * 150);
+        });
+      }
+    }
+    
+    // Service cards animation
+    function animateServiceCards() {
+      const serviceCards = document.querySelectorAll('.service-card');
+      serviceCards.forEach((card, index) => {
+        setTimeout(() => {
+          card.classList.add('show');
+        }, index * 100);
+      });
+    }
+    
+    // About section animation
+    function animateAboutSection() {
+      const aboutColumns = document.querySelectorAll('.about-section .col-lg-6');
+      aboutColumns.forEach((col, index) => {
+        setTimeout(() => {
+          col.classList.add('show');
+        }, index * 300);
+      });
+    }
+    
+    // Contact section animation
+    function animateContactSection() {
+      const contactInfos = document.querySelectorAll('.contact-info');
+      contactInfos.forEach((info, index) => {
+        setTimeout(() => {
+          info.classList.add('show');
+        }, index * 300);
+      });
+    }
+
+    // Initialize animations on load
+    window.addEventListener('load', () => {
+      // Immediately show hero section
+      document.querySelector('#home').classList.add('show');
+      
+      // Check for other visible sections on load
+      animateOnScroll();
+    });
+
+    // Check for animations on scroll
+    window.addEventListener('scroll', animateOnScroll);
+  </script>
+</body>
+</html>
